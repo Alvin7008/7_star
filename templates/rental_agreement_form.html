@@ -1,10 +1,27 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Rental Agreement Form</title>
 </head>
 <body>
-$END$
+
+<form method="post">
+    <br><br>
+
+    {{ form.hidden_tag() }}
+    {{ form.durationOfContract.label}}
+    {{form.durationOfContract()}}
+<br><br>
+    {{form.submit()}}
+</form>
+
+
 </body>
 </html>
+
+{% endblock %}
