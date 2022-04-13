@@ -40,8 +40,6 @@ def rentalAgreemnet():
         durationOfContract = form.durationOfContract.data
         form.durationOfContract.data = ''
 
-
-
     return render_template('rental_agreement_form.html', durationOfContract=durationOfContract, form=form)
 
 

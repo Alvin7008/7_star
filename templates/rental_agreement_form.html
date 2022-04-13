@@ -9,19 +9,73 @@
     <title>Rental Agreement Form</title>
 </head>
 <body>
-
-<form method="post">
+    <br><br>
     <br><br>
 
-    {{ form.hidden_tag() }}
-    {{ form.durationOfContract.label}}
-    {{form.durationOfContract()}}
-<br><br>
-    {{form.submit()}}
+<form class="row g-3" method="post">
+
+
+  <div class="col-md-6">
+    <label for="inputrano" class="form-label">Rental Agreement No</label>
+    <input type="number" class="form-control" id="inputrano" name="inputrano">
+  </div>
+  <div class="col-md-6">
+    <label for="inputPo" class="form-label">PO Number</label>
+    <input type="text" class="form-control" id="inputPo" name="inputPo">
+  </div>
+
+    <div class="col-md-6">
+        <label for="datetimepicker1" class="form-label">Date</label>
+        <div class="input-group">
+    <input type="text" class="form-control" id="datetimepicker1" name="datetimepicker1">
+  <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+    </div>
+    </div>
+
+
+  <div class="col-md-6">
+    <label for="inputVehno" class="form-label">Vehicle No</label>
+    <input type="text" class="form-control" id="inputVehno" name="inputVehno" placeholder="Vehicle No">
+  </div>
+  <div class="col-md-6">
+    <label for="inputvehtype" class="form-label">Vehicle Type</label>
+    <input type="text" class="form-control" id="inputvehtype" name="inputvehtype">
+  </div>
+  <div class="col-md-4">
+    <label for="inputState" class="form-label">State</label>
+    <select id="inputState" class="form-select">
+      <option selected>Choose...</option>
+      <option>...</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label for="inputZip" class="form-label">Zip</label>
+    <input type="text" class="form-control" id="inputZip">
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </div>
 </form>
 
 
+ <script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datepicker();
+        });
+    </script>
+
+
 </body>
+
 </html>
 
 {% endblock %}
