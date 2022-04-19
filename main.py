@@ -11,6 +11,8 @@ app = Flask(__name__)
 # Secert key for forms
 app.config['SECRET_KEY']="This is my secret key"
 
+# Adding Database Config
+app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:root@localhost/seven_stars'
 
 
 # Page not found
