@@ -40,7 +40,8 @@
   </div>
   <div class="col-md-6">
     <label for="inputvehtype" class="form-label">Vehicle Type</label>
-    <input type="text" class="form-control" id="inputvehtype" name="inputvehtype">
+    <input type="text" class="form-control" id="inputvehtype" name="inputvehtype"  onkeyup="showVehicles(this.value)">
+    <div name="vehsuggestionList" id="vehsuggestionList"> </div>
   </div>
   <div class="col-md-4">
     <label for="inputState" class="form-label">State</label>
@@ -71,6 +72,26 @@
         $(function() {
             $('#datetimepicker1').datepicker();
         });
+
+function showVehicles(inputString){
+
+          $('#vehsuggestionList').show();
+
+        if(inputString!=""){
+        $.post('/getvehicle', {queryString: ""+inputString+""}, function(data){
+        $('#vehsuggestionList').html(data);
+                $('#vehsuggestionList').append(data.htmlresponse);
+        });
+        }
+
+}
+
+function fill(thisValue) {
+  $('#inputvehtype').val(thisValue);
+  $('#vehsuggestionList').hide();
+  setTimeout("$('#vehsuggestionList').fadeOut();", 600);
+}
+
     </script>
 
 
