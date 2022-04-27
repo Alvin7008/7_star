@@ -102,9 +102,8 @@ def signup():
 
     # Closing the cursor
     cursor.close()
-    return "Save"
 
-    # return render_template("login.html")
+    return render_template("login.html")
 
 
 if __name__ == '__main__':
