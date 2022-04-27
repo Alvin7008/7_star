@@ -9,72 +9,136 @@
     <title>Rental Agreement Form</title>
 </head>
 <body>
-    <br><br>
-    <br><br>
+<br><br>
+<br><br>
 
 <form class="row g-3" method="post">
 
 
-  <div class="col-md-6">
-    <label for="inputrano" class="form-label">Rental Agreement No</label>
-    <input type="number" class="form-control" id="inputrano" name="inputrano">
-  </div>
-  <div class="col-md-6">
-    <label for="inputPo" class="form-label">PO Number</label>
-    <input type="text" class="form-control" id="inputPo" name="inputPo">
-  </div>
+    <div class="col-md-6">
+        <label class="form-label" for="inputrano">Rental Agreement No</label>
+        <input class="form-control" id="inputrano" name="inputrano" type="number">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="inputPo">PO Number</label>
+        <input class="form-control" id="inputPo" name="inputPo" type="text">
+    </div>
+
 
     <div class="col-md-6">
-        <label for="datetimepicker1" class="form-label">Date</label>
+        <label class="form-label" for="inputVehno">Vehicle No</label>
+        <input class="form-control" id="inputVehno" name="inputVehno" placeholder="Vehicle No" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="inputvehtype">Vehicle Type</label>
+        <input class="form-control" id="inputvehtype" name="inputvehtype" onkeyup="showVehicles(this.value)"
+               type="text">
+        <div id="vehsuggestionList" name="vehsuggestionList"></div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label" for="datetimepicker1">Start Date</label>
         <div class="input-group">
-    <input type="text" class="form-control" id="datetimepicker1" name="datetimepicker1">
-  <span class="input-group-text">
+            <input class="form-control" id="datetimepicker1" name="datetimepicker1" type="text">
+            <span class="input-group-text">
       <i class="fa fa-calendar"></i></span>
+        </div>
     </div>
+
+    <div class="col-md-6">
+        <label class="form-label" for="datetimepicker2">End Date</label>
+        <div class="input-group">
+            <input class="form-control" id="datetimepicker2" name="datetimepicker2" type="text" onclick="selectEndDate()">
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="timepicker1">Time</label>
+        <div class="input-group">
+            <input class="form-control input-small" id="timepicker1" type="text">
+            <span class="input-group-text">
+      <i class="fa fa-clock-o"></i></span>
+        </div>
     </div>
 
 
-  <div class="col-md-6">
-    <label for="inputVehno" class="form-label">Vehicle No</label>
-    <input type="text" class="form-control" id="inputVehno" name="inputVehno" placeholder="Vehicle No">
-  </div>
-  <div class="col-md-6">
-    <label for="inputvehtype" class="form-label">Vehicle Type</label>
-    <input type="text" class="form-control" id="inputvehtype" name="inputvehtype"  onkeyup="showVehicles(this.value)">
-    <div name="vehsuggestionList" id="vehsuggestionList"> </div>
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <label for="inputZip" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="inputZip">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
+    <div class="col-md-4">
+        <label class="form-label" for="inputState">State</label>
+        <select class="form-select" id="inputState">
+            <option selected>Choose...</option>
+            <option>...</option>
+        </select>
     </div>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </div>
+    <div class="col-md-2">
+        <label class="form-label" for="inputZip">Zip</label>
+        <input class="form-control" id="inputZip" type="text">
+    </div>
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" id="gridCheck" type="checkbox">
+            <label class="form-check-label" for="gridCheck">
+                Check me out
+            </label>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
 </form>
 
 
- <script type="text/javascript">
+<script type="text/javascript">
+
+
+<!-- show date-->
         $(function() {
-            $('#datetimepicker1').datepicker();
+<!--Date setting-->
+            $('#datetimepicker1').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+
+            }).datepicker("setDate",'now');
+
+
+<!--Date setting-->
+$('#datetimepicker2').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+                     startDate: new Date()
+            });
+
+
+<!-- Time set-->
+
+           $('#timepicker1').datetimepicker({
+			format: 'hh:mm:ss a',
+			 icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                }
+
+		}).on("dp.change",function(e){
+      var date = e.date;//e.date is a moment object
+      var target = $(e.target).attr('name');
+<!--      console.log(date.format("HH:mm:ss"))//get time by using format-->
+  });
+
+
+
+
+
+
         });
 
-function showVehicles(inputString){
 
+
+
+<!--show ajax veh type-->
+
+function showVehicles(inputString){
           $('#vehsuggestionList').show();
 
         if(inputString!=""){
@@ -92,7 +156,16 @@ function fill(thisValue) {
   setTimeout("$('#vehsuggestionList').fadeOut();", 600);
 }
 
-    </script>
+function selectEndDate(){
+
+console.log(String($('#datetimepicker1').val()));
+var startdate = $('#datetimepicker1').val();
+
+var formattedDate = new Date(startdate);
+
+}
+
+</script>
 
 
 </body>

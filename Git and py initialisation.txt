@@ -1,0 +1,61 @@
+############## Inside root folder cmd or git bash
+
+############## creating virtual environment #################
+
+python -m venv virtual
+
+############## activate virtual environment
+
+source virtual/Scripts/activate
+
+############## to deactivate virtual environment type "deactivate"
+
+############## to check packages installed
+
+pip freeze
+
+############## Install flask package
+
+pip install flask
+
+############## To run flask App
+
+export FLASK_ENV=development
+
+export FLASK_APP=main.py
+
+flask run
+
+
+
+######### git version control ########
+
+$ git config --global user.name "Your Name"
+$ git config --global user.email "you@youraddress.com"
+$ git config --global push.default matching
+$ git config --global alias.co checkout
+$ git init
+
+git remote add origin git@github.com:Alvin7008/flasker.git
+git branch -M main
+git push -u origin main
+
+
+### after adding, from the next time ####
+
+git add .
+
+git commit -am 'message'
+
+git push
+
+
+
+----------------
+
+**********************package installed**********************
+
+**mysql-connector
+**mysql-connector-python
+**mysqldb
+
