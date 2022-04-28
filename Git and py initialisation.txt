@@ -58,6 +58,7 @@ git push
 **mysql-connector
 **mysql-connector-python
 **mysqldb
+**hashlib
 
 
 *************** query ****************

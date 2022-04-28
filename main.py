@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, jsonify, make_response
 from flask_mysqldb import MySQL
+import hashlib
 
 # Create a flask instance
 app = Flask(__name__)
@@ -72,29 +73,31 @@ def getVehicleType():
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
+    salt = "5gz"
     name = request.form['name']
     email = request.form['emailid']
     empno = request.form['empno']
-    password = request.form['pass1']
+    password = str(request.form['pass1']) + salt
+    hashedpass = hashlib.md5(password.encode())
+    db_password = hashedpass.hexdigest()
 
-    print(name + "  " + email + "   " + empno + "  " + password)
+    print(name + "  " + email + "   " + empno + "  " + db_password)
 
     # Creating a connection cursor
     cursor = mysql.connection.cursor()
     cursor.execute('''select max(id) as id from users ''')
 
     id = cursor.fetchone()
-    print(id[0])
 
     if(id[0] is None):
         cursor.execute('''insert into users (id,name,empno,email,password,createdon) values(%s,%s,%s,%s,%s,now())''',
-                       (1001, name, empno, email, password))
+                       (1001, name, empno, email, db_password))
 
     else:
         cursor.execute('''insert into users (name,empno,email,password,createdon) values(%s,%s,%s,%s,now())''', (name,
                                                                                                                  empno,
                                                                                                                  email,
-                                                                                                                 password))
+                                                                                                                 db_password))
 
 
     # Saving the Actions performed on the DB
@@ -104,6 +107,38 @@ def signup():
     cursor.close()
 
     return render_template("login.html")
+
+
+
+@app.route('/userauth', methods=['POST','GET'])
+def userauthentication():
+    salt = "5gz"
+    # name = request.form['name']
+    # empno = request.form['empno']
+    email = request.form['email']
+    password = str(request.form['password']) + salt
+    hashedpass = hashlib.md5(password.encode())
+    db_password = hashedpass.hexdigest()
+
+    # Creating a connection cursor
+    cursor = mysql.connection.cursor()
+    cursor.execute('''select * from users where email=%s and password=%s''',(email,db_password))
+
+    chk = cursor.rowcount
+    print(str(chk) +"  chk  "+email+"   "+db_password)
+
+    # Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    # Closing the cursor
+    cursor.close()
+
+    if(chk>0):
+        return render_template('home.html')
+    else:
+        return render_template('login.html')
+
+
 
 
 if __name__ == '__main__':
