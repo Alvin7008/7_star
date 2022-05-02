@@ -10,11 +10,10 @@
 </head>
 <body>
 <br><br>
-<br><br>
 
 <form class="row g-3" method="post">
 
-
+<h3>Rental Agreement</h3>
     <div class="col-md-6">
         <label class="form-label" for="inputrano">Rental Agreement No</label>
         <input class="form-control" id="inputrano" name="inputrano" type="number">
@@ -53,8 +52,41 @@
       <i class="fa fa-calendar"></i></span>
         </div>
     </div>
+
+
     <div class="col-md-6">
-        <label class="form-label" for="timepicker1">Time</label>
+        <label class="form-label" for="drivername">Driver</label>
+        <input class="form-control" id="drivername" name="drivername" placeholder="Driver Id" type="text">
+    </div>
+
+   <div class="col-md-6">
+        <label class="form-label" for="payterms">Payment terms</label>
+        <input class="form-control" id="payterms" name="payterms" placeholder="Payment Terms" type="text">
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="modofpayment">Mode of Payemt</label>
+        <select class="form-select" id="modofpayment">
+            <option value="debit" selected>Debit</option>
+            <option value="credit">Credit</option>
+            <option value="cash">Cash</option>
+        </select>
+    </div>
+
+ <div class="col-md-6">
+        <label class="form-label" for="advancepay">Advance Payment</label>
+        <input class="form-control" id="advancepay" name="advancepay" placeholder="Advance Payment" type="number" step=".01">
+    </div>
+
+ <div class="col-md-6">
+        <label class="form-label" for="receiptno">Receipt No</label>
+        <input class="form-control" id="receiptno" name="receiptno" placeholder="Receipt No" type="text">
+    </div>
+
+
+      <div class="col-md-6">
+        <label class="form-label" for="timepicker1">Time Out</label>
         <div class="input-group">
             <input class="form-control input-small" id="timepicker1" type="text">
             <span class="input-group-text">
@@ -62,26 +94,52 @@
         </div>
     </div>
 
+     <div class="col-md-6">
+        <label class="form-label" for="kmout">Km Out</label>
+        <input class="form-control" id="kmout" name="kmout" placeholder="Km Out" type="number">
+    </div>
 
-    <div class="col-md-4">
-        <label class="form-label" for="inputState">State</label>
-        <select class="form-select" id="inputState">
-            <option selected>Choose...</option>
-            <option>...</option>
+     <div class="col-md-6">
+        <label class="form-label" for="kmagreed">Km Agreed</label>
+        <input class="form-control" id="kmagreed" name="kmagreed" placeholder="Km Agreed" type="number">
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="termofagremnt">Term of Agreement</label>
+        <select class="form-select" id="termofagremnt">
+            <option value="daily" selected>Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="Yearly">yearly</option>
         </select>
     </div>
-    <div class="col-md-2">
-        <label class="form-label" for="inputZip">Zip</label>
-        <input class="form-control" id="inputZip" type="text">
+
+     <div class="col-md-6">
+        <label class="form-label" for="rateagreed">Km Agreed</label>
+        <input class="form-control" id="rateagreed" name="rateagreed" placeholder="Rate Agreed" type="number" step=".01">
     </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input class="form-check-input" id="gridCheck" type="checkbox">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
-        </div>
+
+     <div class="col-md-6">
+        <label class="form-label" for="totalrent">Km Agreed</label>
+        <input class="form-control" id="totalrent" name="totalrent" placeholder="Total Rent" type="number" step=".01">
     </div>
+
+
+<!--    <div class="col-md-2">-->
+<!--        <label class="form-label" for="inputZip">Zip</label>-->
+<!--        <input class="form-control" id="inputZip" type="text">-->
+<!--    </div>-->
+<!--    <div class="col-12">-->
+<!--        <div class="form-check">-->
+<!--            <input class="form-check-input" id="gridCheck" type="checkbox">-->
+<!--            <label class="form-check-label" for="gridCheck">-->
+<!--                Check me out-->
+<!--            </label>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
     <div class="col-12">
         <button class="btn btn-primary" type="submit">Save</button>
     </div>

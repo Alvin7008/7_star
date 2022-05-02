@@ -59,7 +59,7 @@ git push
 **mysql-connector-python
 **mysqldb
 **hashlib
-**flask-loginS
+**flask-login
 
 
 *************** query ****************
@@ -76,3 +76,25 @@ CREATE TABLE `seven_stars`.`users` (
   `flag` INT NULL,
   `createdon` DATE NULL,
   PRIMARY KEY (`id`));
+
+
+CREATE TABLE `seven_stars`.`driver_details` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `emid` VARCHAR(255) NOT NULL,
+  `licno` VARCHAR(255) NOT NULL,
+  `emidvald` VARCHAR(255) NOT NULL,
+  `licsdate` DATE NOT NULL,
+  `licedate` DATE NOT NULL,
+  `passportno` VARCHAR(255) NOT NULL,
+  `validity` VARCHAR(255) NOT NULL,
+  `sponsor` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`));
+
+
+ALTER TABLE `seven_stars`.`driver_details`
+ADD COLUMN `createdby` VARCHAR(255) NULL AFTER `sponsor`,
+ADD COLUMN `createdon` VARCHAR(255) NULL AFTER `createdby`,
+ADD COLUMN `editedby` VARCHAR(255) NULL AFTER `createdon`,
+ADD COLUMN `editedon` VARCHAR(255) NULL AFTER `editedby`,
+ADD COLUMN `driver_detailscol` VARCHAR(45) NULL AFTER `editedon`;
+

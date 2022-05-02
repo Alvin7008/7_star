@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Driver Details Form</title>
+</head>
+<body>
+<br><br>
+
+<form class="row g-3" method="post">
+
+    <h3>Driver Details Form</h3>
+
+<div class="col-md-6">
+        <label class="form-label" for="dname" >Driver Name</label>
+        <input class="form-control" id="dname" name="dname" placeholder="Driver Name" type="text">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label" for="emid">Emirates Id</label>
+        <input class="form-control" id="emid" name="emid" placeholder="Emirates Id" type="number">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label" for="licno">License No</label>
+        <input class="form-control" id="licno" name="licno" placeholder="License No" type="text">
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="emidvalidity">Emirates Id Validity</label>
+        <div class="input-group">
+            <input class="form-control" id="emidvalidity" name="emidvalidity" placeholder="Emirates Id Validity" type="text">
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="licsdate">Emirates Id Validity</label>
+        <div class="input-group">
+            <input class="form-control" id="licsdate" name="licsdate" placeholder="Emirates Id Start Date" type="text">
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="licedate">Emirates Id Validity</label>
+        <div class="input-group">
+            <input class="form-control" id="licedate" name="licedate" placeholder="Emirates Id End Date" type="text">
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="passportno">Passport No</label>
+        <input class="form-control" id="passportno" name="passportno" placeholder="Passport No" type="text">
+    </div>
+
+        <div class="col-md-6">
+        <label class="form-label" for="passportval">Emirates Id Validity</label>
+        <div class="input-group">
+            <input class="form-control" id="passportval" name="passportval" placeholder="Passport Validity"  type="text">
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <label class="form-label" for="sponsorname">Sponsor Name</label>
+        <input class="form-control" id="sponsorname" name="sponsorname" placeholder="Sponsor Name" type="text">
+    </div>
+
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+
+
+<!-- show date-->
+ <!--   Start of jquery function-->
+        $(function() {
+
+<!--emid validity Date setting-->
+            $('#emidvalidity').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+            });
+
+
+            <!--Lic Start Date setting-->
+$('#licsdate').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+                     startDate: new Date()
+            });
+
+
+            <!--Lic end Date setting-->
+$('#licedate').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+                     startDate: new Date()
+            });
+
+                        <!--passport  date setting-->
+$('#passportval').datepicker({
+            format: 'dd/mm/yyyy',
+                 autoclose: true,
+                     startDate: new Date()
+            });
+
+
+
+
+     }); <!--   end of jquery function-->
+
+
+function fill(thisValue) {
+  $('#inputvehtype').val(thisValue);
+  $('#vehsuggestionList').hide();
+  setTimeout("$('#vehsuggestionList').fadeOut();", 600);
+}
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
+
+{% endblock %}
