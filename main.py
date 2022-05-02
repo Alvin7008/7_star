@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, url_for, jsonify, make_response
+from flask import Flask, render_template, request, url_for, jsonify, make_response, flash
 from flask_mysqldb import MySQL
 import hashlib
+from flask_login import login_manager, UserMixin, login_user, login_required, logout_user, current_user
 
 # Create a flask instance
 app = Flask(__name__)
@@ -15,6 +16,9 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'seven_stars'
 mysql = MySQL(app)
+
+
+
 
 
 # Page not found
@@ -106,12 +110,16 @@ def signup():
     # Closing the cursor
     cursor.close()
 
+    flash("User Created Successfully")
+
     return render_template("login.html")
 
 
 
 @app.route('/userauth', methods=['POST','GET'])
 def userauthentication():
+
+
     salt = "5gz"
     # name = request.form['name']
     # empno = request.form['empno']
@@ -125,7 +133,6 @@ def userauthentication():
     cursor.execute('''select * from users where email=%s and password=%s''',(email,db_password))
 
     chk = cursor.rowcount
-    print(str(chk) +"  chk  "+email+"   "+db_password)
 
     # Saving the Actions performed on the DB
     mysql.connection.commit()
@@ -136,6 +143,7 @@ def userauthentication():
     if(chk>0):
         return render_template('home.html')
     else:
+        flash("Warning!!!  Invalid user!!!")
         return render_template('login.html')
 
 

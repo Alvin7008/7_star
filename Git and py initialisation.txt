@@ -59,6 +59,7 @@ git push
 **mysql-connector-python
 **mysqldb
 **hashlib
+**flask-loginS
 
 
 *************** query ****************

@@ -189,6 +189,18 @@
 
         <div class="border col-md-6 boxlayout">
 
+            {% for message in get_flashed_messages() %}
+
+             <!--messages-->
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <span aria-label="Close" class="close" data-dismiss="alert" onclick="$('.alert').alert('close');" type="button"><span
+                        aria-hidden="true">
+                    &times;</span></span>
+                {{message}}
+            </div>
+            {% endfor %}
+
+
             <div class="container">
                 <br>
                 <ul class="nav nav-tabs" role="tablist">
@@ -202,7 +214,8 @@
                                             href="#signup"
                                             role="tab">
                         <button class="btn  btn-unselected" id="signupbtn" onclick="changeclass(this)">Sign
-                            -up</button>
+                            -up
+                        </button>
                     </a></li>
 
                 </ul>
@@ -212,16 +225,17 @@
                     <div class="tab-pane fade in active" id="login">
                         <br>
 
-                        <form method="post" id="loginform" name="loginform" autocomplete="on" action="{{url_for('userauthentication')}}" >
+                        <form action="{{url_for('userauthentication')}}" autocomplete="on" id="loginform" method="post"
+                              name="loginform">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input class="form-control" name="email" type="email" autocomplete="on" required>
+                                <input autocomplete="on" class="form-control" name="email" required type="email">
                             </div>
                             <br>
 
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input class="form-control" name="password" type="password" autocomplete="on" required>
+                                <input autocomplete="on" class="form-control" name="password" required type="password">
                             </div>
                             <div class="form-group form-check">
                                 <br>
@@ -231,7 +245,8 @@
                             <div class="form-group">
 
                                 <br>
-                                <button type="submit" class="btn btn-class" id="loginformbtn"  name="loginformbtn">Login
+                                <button class="btn btn-class" id="loginformbtn" name="loginformbtn"
+                                        type="submit">Login
                                 </button>
                             </div>
                         </form>
@@ -239,43 +254,48 @@
                     </div>
 
                     <div class="tab-pane fade" id="signup">
-                        <form method="post" class="" id="signupform" name="signupform" autocomplete="on"
-                              action="{{url_for('signup')}}">
+                        <form action="{{url_for('signup')}}" autocomplete="on" class="" id="signupform" method="post"
+                              name="signupform">
                             <br>
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" autocomplete="on"
-                                       required>
+                                <input autocomplete="on" class="form-control" id="name" name="name" placeholder="Name"
+                                       required
+                                       type="text">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="emailid">Email</label>
-                                <input class="form-control" id="emailid" name="emailid" placeholder="email" autocomplete="on"
-                                       type="email" required>
+                                <input autocomplete="on" class="form-control" id="emailid" name="emailid"
+                                       placeholder="email"
+                                       required type="email">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="empno">Emp No</label>
-                                <input class="form-control" id="empno" name="empno" placeholder="Employee no" autocomplete="on"
-                                       type="text" required>
+                                <input autocomplete="on" class="form-control" id="empno" name="empno"
+                                       placeholder="Employee no"
+                                       required type="text">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="pass1">Password</label>
                                 <input class="form-control" id="pass1" name="pass1" placeholder="Password"
-                                       type="password" required>
+                                       required type="password">
                                 <br>
                                 <input class="form-control" id="pass2" name="pass2" onblur="checkpass()"
                                        placeholder="Re-Enter Password"
-                                       type="password"  required>
+                                       required type="password">
 
                             </div>
                             <div class="form-group">
 
                                 <br>
-                                <button type="submit" class="btn btn-class"  id="signupfrombtn" name="signupfrombtn"
-                                       onclick="return checkpass()">Sign
-                                    -up</button>
+                                <button class="btn btn-class" id="signupfrombtn" name="signupfrombtn"
+                                        onclick="return checkpass(); disablebtn(this)"
+                                        type="submit">Sign
+                                    -up
+                                </button>
                             </div>
 
                         </form>
@@ -359,6 +379,8 @@ body{
 
 
 
+
+
 </style>
 
 <script>
@@ -409,6 +431,11 @@ return false;
 }
 
 }
+
+function disablebtn(obj){
+  obj.disabled = true;
+}
+
 
 
 
