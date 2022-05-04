@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = "This is my secret key"
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:root@localhost/seven_stars'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Prince1988'
+app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'seven_stars'
 mysql = MySQL(app)
 
@@ -89,47 +89,45 @@ def getVehicleType():
     else:
         return flask.redirect('/')
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['POST','GET'])
 def signup():
-    if (session.get('empno') != None):
 
-        salt = "5gz"
-        name = request.form['name']
-        email = request.form['emailid']
-        empno = request.form['empno']
-        password = str(request.form['pass1']) + salt
-        hashedpass = hashlib.md5(password.encode())
-        db_password = hashedpass.hexdigest()
+    salt = "5gz"
+    name = request.form['name']
+    email = request.form['emailid']
+    empno = request.form['empno']
+    password = str(request.form['pass1']) + salt
+    hashedpass = hashlib.md5(password.encode())
+    db_password = hashedpass.hexdigest()
 
-        # print(name + "  " + email + "   " + empno + "  " + db_password)
+    # print(name + "  " + email + "   " + empno + "  " + db_password)
 
-        # Creating a connection cursor
-        cursor = mysql.connection.cursor()
-        cursor.execute('''select max(id) as id from users ''')
+    # Creating a connection cursor
+    cursor = mysql.connection.cursor()
+    cursor.execute('''select max(id) as id from users ''')
 
-        id = cursor.fetchone()
+    id = cursor.fetchone()
 
-        if(id[0] is None):
-            cursor.execute('''insert into users (id,name,empno,email,password,createdon) values(%s,%s,%s,%s,%s,now())''',
-                           (1001, name, empno, email, db_password))
+    if(id[0] is None):
+        cursor.execute('''insert into users (id,name,empno,email,password,createdon) values(%s,%s,%s,%s,%s,now())''',
+                       (1001, name, empno, email, db_password))
 
-        else:
-            cursor.execute('''insert into users (name,empno,email,password,createdon) values(%s,%s,%s,%s,now())''', (name,
-                                                                                                                     empno,
-                                                                                                                     email,
-                                                                                                                     db_password))
-
-        # Saving the Actions performed on the DB
-        mysql.connection.commit()
-
-        # Closing the cursor
-        cursor.close()
-
-        flash("User Created Successfully")
-
-        return render_template("login.html")
     else:
-        return flask.redirect('/')
+        cursor.execute('''insert into users (name,empno,email,password,createdon) values(%s,%s,%s,%s,now())''', (name,
+                                                                                                                 empno,
+                                                                                                                 email,
+                                                                                                                 db_password))
+
+    # Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    # Closing the cursor
+    cursor.close()
+
+    flash("User Created Successfully")
+
+    return render_template("login.html")
+
 
 
 @app.route('/userauth', methods=['POST','GET'])

@@ -17,24 +17,36 @@
 
 <div class="col-md-6">
         <label class="form-label" for="dname" >Driver Name</label>
-        <input class="form-control" id="dname" name="dname" placeholder="Driver Name" type="text">
+        <input class="form-control" id="dname" name="dname" placeholder="Driver Name" type="text" required>
     </div>
 
     <div class="col-md-6">
         <label class="form-label" for="emid">Emirates Id</label>
-        <input class="form-control" id="emid" name="emid" placeholder="Emirates Id" type="number">
+        <input class="form-control" id="emid" name="emid" placeholder="Emirates Id" type="number" required>
     </div>
 
-    <div class="col-md-6">
-        <label class="form-label" for="licno">License No</label>
-        <input class="form-control" id="licno" name="licno" placeholder="License No" type="text">
-    </div>
+
 
 
     <div class="col-md-6">
         <label class="form-label" for="emidvalidity">Emirates Id Validity</label>
         <div class="input-group">
-            <input class="form-control" id="emidvalidity" name="emidvalidity" placeholder="Emirates Id Validity" type="text">
+            <input class="form-control" id="emidvalidity" name="emidvalidity" placeholder="Emirates Id Validity"
+                   type="text" required>
+            <span class="input-group-text">
+      <i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+ <div class="col-md-6">
+        <label class="form-label" for="licno">License No</label>
+        <input class="form-control" id="licno" name="licno" placeholder="License No" type="text" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label" for="licsdate">License Start Date</label>
+        <div class="input-group">
+            <input class="form-control" id="licsdate" name="licsdate" placeholder="License Start Date" type="text" required>
             <span class="input-group-text">
       <i class="fa fa-calendar"></i></span>
         </div>
@@ -42,19 +54,9 @@
 
 
     <div class="col-md-6">
-        <label class="form-label" for="licsdate">Emirates Id Validity</label>
+        <label class="form-label" for="licedate">License End Date</label>
         <div class="input-group">
-            <input class="form-control" id="licsdate" name="licsdate" placeholder="Emirates Id Start Date" type="text">
-            <span class="input-group-text">
-      <i class="fa fa-calendar"></i></span>
-        </div>
-    </div>
-
-
-    <div class="col-md-6">
-        <label class="form-label" for="licedate">Emirates Id Validity</label>
-        <div class="input-group">
-            <input class="form-control" id="licedate" name="licedate" placeholder="Emirates Id End Date" type="text">
+            <input class="form-control" id="licedate" name="licedate" placeholder="License End Date" type="text" required>
             <span class="input-group-text">
       <i class="fa fa-calendar"></i></span>
         </div>
@@ -63,13 +65,14 @@
 
     <div class="col-md-6">
         <label class="form-label" for="passportno">Passport No</label>
-        <input class="form-control" id="passportno" name="passportno" placeholder="Passport No" type="text">
+        <input class="form-control" id="passportno" name="passportno" placeholder="Passport No" type="text" required>
     </div>
 
         <div class="col-md-6">
         <label class="form-label" for="passportval">Emirates Id Validity</label>
         <div class="input-group">
-            <input class="form-control" id="passportval" name="passportval" placeholder="Passport Validity"  type="text">
+            <input class="form-control" id="passportval" name="passportval" placeholder="Passport Validity"
+                   type="text" required>
             <span class="input-group-text">
       <i class="fa fa-calendar"></i></span>
         </div>
@@ -78,12 +81,12 @@
 
     <div class="col-md-6">
         <label class="form-label" for="sponsorname">Sponsor Name</label>
-        <input class="form-control" id="sponsorname" name="sponsorname" placeholder="Sponsor Name" type="text">
+        <input class="form-control" id="sponsorname" name="sponsorname" placeholder="Sponsor Name" type="text" required>
     </div>
 
 
     <div class="col-12">
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit" onclick="return validate();">Save</button>
     </div>
 
 </form>
@@ -98,31 +101,29 @@
 
 <!--emid validity Date setting-->
             $('#emidvalidity').datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'mm/dd/yyyy',
                  autoclose: true,
             });
 
 
             <!--Lic Start Date setting-->
 $('#licsdate').datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'mm/dd/yyyy',
+                        endDate: '+0d',
                  autoclose: true,
-                     startDate: new Date()
             });
 
 
             <!--Lic end Date setting-->
 $('#licedate').datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'mm/dd/yyyy',
                  autoclose: true,
-                     startDate: new Date()
             });
 
                         <!--passport  date setting-->
 $('#passportval').datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'mm/dd/yyyy',
                  autoclose: true,
-                     startDate: new Date()
             });
 
 
@@ -131,10 +132,15 @@ $('#passportval').datepicker({
      }); <!--   end of jquery function-->
 
 
-function fill(thisValue) {
-  $('#inputvehtype').val(thisValue);
-  $('#vehsuggestionList').hide();
-  setTimeout("$('#vehsuggestionList').fadeOut();", 600);
+function validate()
+{
+
+licstartdate = document.getElementById("licsdate").value;
+licenddate = document.getElementById("licedate").value;
+
+alert(licstartdate + "   " +licenddate);
+
+return false;
 }
 
 
